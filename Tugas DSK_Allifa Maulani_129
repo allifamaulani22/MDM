@@ -1,0 +1,59 @@
+.model SMALL
+.code
+.ORG 100h
+tdata:
+   jmp proses
+   lNIM db 13,10,'Masukkan NIM : $'
+   lNama db 13,10,'Masukkan Nama : $'
+   lOut db 13,10,'Data Mahasiswa',13,10,'$'
+   lNIM2 db 'NIM : $'
+   lNama2 db 13,10,'Nama : $'
+   
+   vNIM db 23,?,23 dup('$')
+   vNama db 23,?,23 dup('$') 
+   
+proses:
+   ; ==== Input NIM ======
+   mov ah,09h 
+   lea dx,lNIM
+   int 21h
+   
+   mov ah,0ah   
+   lea dx,vNIM
+   int 21h
+   
+   ; ===== Input Nama =====
+   mov ah,09h 
+   lea dx,lNama
+   int 21h
+   
+   mov ah,0ah
+   lea dx,vNama
+   int 21h 
+   
+   ; ===== Output Data =====
+   mov ah,09h
+   lea dx,lOut
+   int 21h
+   
+   mov ah,09h
+   lea dx,lNIM2
+   int 21h
+   
+   mov ah,09h
+   lea dx,vNIM+2
+   int 21h
+   
+   mov ah,09h
+   lea dx,lNama2
+   int 21h
+   
+   mov ah,09h
+   lea dx,vNama+2
+   int 21h
+   
+exit:
+   int 20h
+end tdata
+   
+   
